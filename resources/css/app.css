@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components{
+    .close-dialog{
+        display: none;
+    }
+
+    .edit-model{
+        display: none;
+    }
+}

@@ -10,4 +10,15 @@
     .edit-model{
         display: none;
     }
+
+    input[type=text],
+    input[type=tel],
+    input[type=date],
+    select{
+        font-size: theme('fontSize[sm]');
+    }
+
+    .job-model{
+        display: none;
+    }
 }

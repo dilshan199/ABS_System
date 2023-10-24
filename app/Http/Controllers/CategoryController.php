@@ -16,7 +16,15 @@ class CategoryController extends Controller
         //
         $category = Category::paginate(50);
 
-        return view('category.category', compact('category'));
+        if(session()->has('loggedin')){
+            $user = DB::table('users')->select('*')->where('id', '=', session('loggedin'))->first();
+
+            $user_data = [
+                'user' => $user
+            ];
+        }
+
+        return view('category.category', compact('category', 'user'));
     }
 
     /**

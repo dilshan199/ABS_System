@@ -15,7 +15,6 @@ class CreateTableInvoice extends Migration
     {
         Schema::create('invoice', function (Blueprint $table) {
             $table->bigIncrements('invoice_id');
-            $table->string('invoice_no', 255)->nullable(false);
             $table->unsignedBigInteger('customer_id')->nullable();
             $table->foreign('customer_id')->references('customer_id')->on('customer')->onUpdate('cascade')->onDelete('restrict');
             $table->string('insurance_company', 255)->nullable();

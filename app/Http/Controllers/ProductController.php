@@ -27,7 +27,15 @@ class ProductController extends Controller
 
         $p_id = $maxID->max_id + 1;
 
-        return view('products.product', compact('product', 'category', 'p_id'));
+        if(session()->has('loggedin')){
+            $user = DB::table('users')->select('*')->where('id', '=', session('loggedin'))->first();
+
+            $user_data = [
+                'user' => $user
+            ];
+        }
+
+        return view('products.product', compact('product', 'category', 'p_id', 'user'));
     }
 
     /**
@@ -127,10 +135,10 @@ class ProductController extends Controller
 
         $product = DB::table('products')
         ->select('*')
-        ->where('p_id', '=', $p_id, 'or')
-        ->where('item', 'like', $item.'%', 'or')
-        ->where('description', 'like', '%'.$description.'%')
-        ->get();
+        ->where('p_id', '=', $p_id)
+        ->orWhere('item', 'like', '%'.$item.'%')
+        ->orWhere('description', 'like', '%'.$description.'%')
+        ->paginate(50);
 
         $category = DB::table('category')
         ->select('*')
@@ -142,8 +150,14 @@ class ProductController extends Controller
 
         $p_id = $maxID->max_id + 1;
 
-        if(count($product) > 0){
-            return view('products.product', compact('product', 'p_id', 'category'));
+        if(session()->has('loggedin')){
+            $user = DB::table('users')->select('*')->where('id', '=', session('loggedin'))->first();
+
+            $user_data = [
+                'user' => $user
+            ];
         }
+
+        return view('products.product', compact('product', 'p_id', 'category', 'user'));
     }
 }

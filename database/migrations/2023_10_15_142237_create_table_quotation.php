@@ -15,7 +15,6 @@ class CreateTableQuotation extends Migration
     {
         Schema::create('quotation', function (Blueprint $table) {
             $table->bigIncrements('quotation_id');
-            $table->string('quotation_number', 255)->nullable(false);
             $table->unsignedBigInteger('customer_id')->nullable();
             $table->foreign('customer_id')->references('customer_id')->on('customer')->onUpdate('cascade')->onDelete('restrict');
             $table->string('insurance_company', 255)->nullable();
@@ -27,6 +26,7 @@ class CreateTableQuotation extends Migration
             $table->string('model', 150)->nullable();
             $table->string('engine_no', 255)->nullable();
             $table->string('remarks', 3000)->nullable();
+            $table->double('quo_amount', 10, 2)->default('0.00');
             $table->date('quotation_date')->nullable(false);
             $table->timestamps();
         });

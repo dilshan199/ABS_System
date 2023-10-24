@@ -164,7 +164,7 @@
         </tbody>
     </table>
 </div>
-{{-- {{ $product->links()}} --}}
+{{ $product->links()}}
 
 {{--Confirm dialog--}}
 <div class="fixed w-full top-10 h-full left-0 close-dialog bg-gray-500/50 ml-28" id="confirmDialog">
